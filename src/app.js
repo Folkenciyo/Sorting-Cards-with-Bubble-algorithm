@@ -15,13 +15,9 @@ window.onload = function() {
   for (let i = 0; i < DECK; i++) {
     cards.push(getCard());
   }
-  console.log(cards);
-  button();
-  input();
-  /*  SUBMIT.addEventListener("submit", event => {
-    event.preventDefault();
-  }); */
-  /* submitButon(); */
+
+  putCardsOnTable();
+  addInput();
 };
 
 function getCard() {
@@ -76,37 +72,20 @@ INTERACTIONS.classList.add("interactions");
 FORM.appendChild(INTERACTIONS);
 INTERACTIONS.innerHTML = "USE ME";
 
-function button() {
+function putCardsOnTable() {
   let BUTTON = document.createElement("button");
   BUTTON.classList.add("btn");
   INTERACTIONS.appendChild(BUTTON);
   BUTTON.innerHTML = "Get a Card";
-  return BUTTON.addEventListener("click", () => {
+  BUTTON.addEventListener("click", event => {
+    event.preventDefault();
+    DECK = INPUT.value;
     drawCards(cards);
   });
 }
 
-function input() {
+const addInput = () => {
   let INPUT = document.createElement("input");
-  INPUT.classList.add("input");
   INTERACTIONS.appendChild(INPUT);
-  INPUT.innerHTML = "";
-  return INPUT.addEventListener("submit", () => {
-    DECK = INPUT + DECK;
-  });
-}
-
-let SUBMIT = document.querySelector("#SUBMIT");
-FORM.appendChild(SUBMIT);
-
-/* function submitButon() {
-  let SUBMIT = document.createElement("button");
-  SUBMIT.classList.add("btn");
-
-  INTERACTIONS.appendChild(SUBMIT);
-  SUBMIT.innerHTML = "ENVIAR";
-  SUBMIT.addEventListener("submit", event => {
-    event.preventDefault();
-    input();
-  });
-} */
+  console.log(INPUT.value);
+};
