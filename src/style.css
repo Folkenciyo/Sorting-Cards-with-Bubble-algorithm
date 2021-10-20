@@ -49,6 +49,7 @@ body {
   text-shadow: -2px 1px 9px rgb(54, 41, 41);
   margin: 1rem;
   align-items: right;
+  transform: rotate(180deg);
 }
 
 .color1 {
@@ -61,14 +62,30 @@ body {
 
 .btn {
   background-color: rgb(84 16 131);
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   color: #814715;
-  font-weight: bold;
-  font-weight: bold;
+  font-weight: 10px;
   text-shadow: 1px -6px 9px #fdfdfd;
   border: white;
+  align-items: center;
   justify-content: center;
   font-family: fantasy;
   font-size: xx-large;
+}
+
+.input {
+  margin: 3rem;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  justify-content: end;
+  align-self: center;
+}
+
+.interactions {
+  background: currentColor;
+  padding: 2rem;
+  justify-content: center;
+  align-content: center;
 }

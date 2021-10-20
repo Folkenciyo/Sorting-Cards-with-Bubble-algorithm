@@ -8,7 +8,7 @@ import "./assets/img/4geeks.ico";
 const BODY = document.querySelector("body");
 const SUITS = ["♠", "♣", "♥", "♦"];
 const VALUES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-const DECK = 4;
+const DECK = 0;
 let cards = []; //[{value: 1, suit: ♣}, {value:4, suit: ♦ } ... }]
 
 window.onload = function() {
@@ -17,6 +17,11 @@ window.onload = function() {
   }
   console.log(cards);
   button();
+  input();
+  /*  SUBMIT.addEventListener("submit", event => {
+    event.preventDefault();
+  }); */
+  /* submitButon(); */
 };
 
 function getCard() {
@@ -49,7 +54,7 @@ function drawCards(cards) {
     suitdown.classList.add("suitdown");
     cardBody.appendChild(suitdown);
 
-    num.innerHTML = card["value"];
+    num.innerHTML = card["value"]; // card.suit;
     suitup.innerHTML = suitdown.innerHTML = card["suit"];
 
     if (card["suit"] == "♠" || card["suit"] == "♣") {
@@ -62,12 +67,46 @@ function drawCards(cards) {
   }
 }
 
+let FORM = document.createElement("form");
+FORM.classList.add("form");
+BODY.appendChild(FORM);
+
+let INTERACTIONS = document.createElement("div");
+INTERACTIONS.classList.add("interactions");
+FORM.appendChild(INTERACTIONS);
+INTERACTIONS.innerHTML = "USE ME";
+
 function button() {
   let BUTTON = document.createElement("button");
   BUTTON.classList.add("btn");
-  BODY.appendChild(BUTTON);
+  INTERACTIONS.appendChild(BUTTON);
   BUTTON.innerHTML = "Get a Card";
   return BUTTON.addEventListener("click", () => {
     drawCards(cards);
   });
 }
+
+function input() {
+  let INPUT = document.createElement("input");
+  INPUT.classList.add("input");
+  INTERACTIONS.appendChild(INPUT);
+  INPUT.innerHTML = "";
+  return INPUT.addEventListener("submit", () => {
+    DECK = INPUT + DECK;
+  });
+}
+
+let SUBMIT = document.querySelector("#SUBMIT");
+FORM.appendChild(SUBMIT);
+
+/* function submitButon() {
+  let SUBMIT = document.createElement("button");
+  SUBMIT.classList.add("btn");
+
+  INTERACTIONS.appendChild(SUBMIT);
+  SUBMIT.innerHTML = "ENVIAR";
+  SUBMIT.addEventListener("submit", event => {
+    event.preventDefault();
+    input();
+  });
+} */
