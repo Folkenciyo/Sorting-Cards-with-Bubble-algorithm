@@ -8,30 +8,26 @@ import "./assets/img/4geeks.ico";
 const BODY = document.querySelector("body");
 const SUITS = ["♠", "♣", "♥", "♦"];
 const VALUES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-const DECK = 0;
+let DECK = 0;
 let cards = []; //[{value: 1, suit: ♣}, {value:4, suit: ♦ } ... }]
 
 window.onload = function() {
-  for (let i = 0; i < DECK; i++) {
-    cards.push(getCard());
-  }
-
-  putCardsOnTable();
   addInput();
+  putCardsOnTable();
 };
-
+//Devuelve un diccionario con valores aleatorios para el suit y el number de la carta
 function getCard() {
   return {
     value: VALUES[getRandom(VALUES)],
     suit: SUITS[getRandom(SUITS)]
   };
 }
-
+//Da un numero aleatorio
 function getRandom(list) {
   let position = Math.floor(Math.random() * list.length);
   return position;
 }
-
+//dibuja la carta dandole un cuerpo añadiendo un suit arriba, un numero al centro, un suit abajo
 function drawCards(cards) {
   for (let card of cards) {
     let cardBody = document.createElement("div");
@@ -52,7 +48,7 @@ function drawCards(cards) {
 
     num.innerHTML = card["value"]; // card.suit;
     suitup.innerHTML = suitdown.innerHTML = card["suit"];
-
+    //diferencia el color dependiendo del palo
     if (card["suit"] == "♠" || card["suit"] == "♣") {
       suitup.classList.add("color1");
       suitdown.classList.add("color1");
@@ -66,26 +62,31 @@ function drawCards(cards) {
 let FORM = document.createElement("form");
 FORM.classList.add("form");
 BODY.appendChild(FORM);
-
+// div donde se encuentran todos los elementos interactivos
 let INTERACTIONS = document.createElement("div");
 INTERACTIONS.classList.add("interactions");
 FORM.appendChild(INTERACTIONS);
-INTERACTIONS.innerHTML = "USE ME";
+// Input donde meteremos el numero de cartas a jugar
+const addInput = () => {
+  let INPUT = document.createElement("input");
+  INTERACTIONS.appendChild(INPUT);
 
+  INPUT.addEventListener("focusout", event => {
+    console.log(INPUT.value);
+    DECK = INPUT.value;
+  });
+};
+//la funcion del boton es colocar todas las cartas sobre la mesa.
 function putCardsOnTable() {
   let BUTTON = document.createElement("button");
   BUTTON.classList.add("btn");
   INTERACTIONS.appendChild(BUTTON);
-  BUTTON.innerHTML = "Get a Card";
+  BUTTON.innerHTML = "Get Cards";
   BUTTON.addEventListener("click", event => {
     event.preventDefault();
-    DECK = INPUT.value;
+    for (let i = 0; i < DECK; i++) {
+      cards.push(getCard());
+    }
     drawCards(cards);
   });
 }
-
-const addInput = () => {
-  let INPUT = document.createElement("input");
-  INTERACTIONS.appendChild(INPUT);
-  console.log(INPUT.value);
-};
