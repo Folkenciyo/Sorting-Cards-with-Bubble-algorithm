@@ -15,6 +15,7 @@ window.onload = function() {
   addInput();
   putCardsOnTable();
   bubbleSort();
+  sort();
 };
 //Devuelve un diccionario con valores aleatorios para el suit y el number de la carta
 function getCard() {
@@ -30,10 +31,13 @@ function getRandom(list) {
 }
 //dibuja la carta dandole un cuerpo añadiendo un suit arriba, un numero al centro, un suit abajo
 function drawCards(cards) {
+  let rug = document.createElement("div");
+  rug.classList.add("rug");
+  BODY.appendChild(rug);
   for (let card of cards) {
     let cardBody = document.createElement("div");
     cardBody.classList.add("card");
-    BODY.appendChild(cardBody);
+    rug.appendChild(cardBody);
 
     let suitup = document.createElement("div");
     suitup.classList.add("suitup");
@@ -70,6 +74,7 @@ FORM.appendChild(INTERACTIONS);
 // Input donde meteremos el numero de cartas a jugar
 const addInput = () => {
   let INPUT = document.createElement("input");
+  INPUT.classList.add("addInput");
   INTERACTIONS.appendChild(INPUT);
   INPUT.addEventListener("focusout", event => {
     DECK = INPUT.value;
@@ -122,4 +127,32 @@ let bubbleSort = () => {
   });
 };
 
-var sort = () => {};
+var sort = () => {
+  function selectionSort(inputArr) {
+    let m = inputArr.length;
+
+    for (let w = 0; w < navigator; w++) {
+      let min = w;
+      for (let r = m + 1; r < m; r++) {
+        if (inputArr[r].value < inputArr[min].value) {
+          min = r;
+        }
+      }
+      if (min != w) {
+        let tpm = inputArr[w].value;
+        inputArr[w].value = inputArr[min].value;
+        inputArr[min].value = tpm;
+      }
+    }
+    return inputArr;
+  }
+  let sortButton = document.createElement("button");
+  sortButton.classList.add("btn");
+  INTERACTIONS.appendChild(sortButton);
+  sortButton.innerHTML = "SORT BY BUBBLE";
+
+  sortButton.addEventListener("click", event => {
+    event.preventDefault();
+    drawCards(selectionSort(cards));
+  });
+};
