@@ -7,6 +7,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-flow: row;
 }
 
 .rug {
@@ -68,18 +69,46 @@ body {
 }
 
 .btn {
-  background-color: rgb(84 16 131);
-  width: 300px;
-  height: 150px;
-  color: #814715;
-  font-weight: 10px;
-  text-shadow: 1px -6px 9px #fdfdfd;
-  border: white;
-  align-items: center;
-  justify-content: center;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
   font-family: fantasy;
-  font-size: xx-large;
-  margin: 1rem;
+  color: #a7cafc;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+  background: #b621fe;
+  border: none;
+  z-index: 1;
+}
+.btn:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  background-color: #ca579e;
+  border-radius: 5px;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  color: #fff;
+}
+.btn:hover:after {
+  left: 0;
+  width: 100%;
+}
+.btn:active {
+  top: 2px;
 }
 
 .addInput {
