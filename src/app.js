@@ -14,6 +14,7 @@ let cards = []; //[{value: 1, suit: ♣}, {value:4, suit: ♦ } ... }]
 window.onload = function() {
   addInput();
   putCardsOnTable();
+  bubbleSort();
 };
 //Devuelve un diccionario con valores aleatorios para el suit y el number de la carta
 function getCard() {
@@ -70,9 +71,7 @@ FORM.appendChild(INTERACTIONS);
 const addInput = () => {
   let INPUT = document.createElement("input");
   INTERACTIONS.appendChild(INPUT);
-
   INPUT.addEventListener("focusout", event => {
-    console.log(INPUT.value);
     DECK = INPUT.value;
   });
 };
@@ -90,3 +89,37 @@ function putCardsOnTable() {
     drawCards(cards);
   });
 }
+
+let bubbleSort = () => {
+  //function BubbleSort
+  const bubble = arr => {
+    let wall = arr.length - 1; //we start the wall at the end of the array
+    while (wall > 0) {
+      let index = 0;
+      while (index < wall) {
+        //compare the adjacent positions, if the right one is bigger, we have to swap
+        if (arr[index].value > arr[index + 1].value) {
+          let aux = arr[index].value;
+          arr[index].value = arr[index + 1].value;
+          arr[index + 1].value = aux;
+        }
+        index++;
+      }
+      wall--; //decrease the wall for optimization
+    }
+    return arr;
+  };
+  console.log(bubble(cards));
+
+  let bubbleBotton = document.createElement("button");
+  bubbleBotton.classList.add("btn");
+  INTERACTIONS.appendChild(bubbleBotton);
+  bubbleBotton.innerHTML = "SORT BY BUBBLE";
+
+  bubbleBotton.addEventListener("click", event => {
+    event.preventDefault();
+    drawCards(bubble(cards));
+  });
+};
+
+var sort = () => {};
